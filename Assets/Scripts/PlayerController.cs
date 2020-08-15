@@ -27,7 +27,10 @@ public class PlayerController : MonoBehaviour {
             laserActive = false;
             laser.size = new Vector2(laser.size.x, 0f);
             foreach (GameObject c in charactersInLaser) {
+                if (!c) continue;
                 c.transform.SetParent(null);
+                c.GetComponent<CharacterAnimator>().MovingAnimation(true);
+                c.GetComponent<FleeingCharacter>().canMove = true;
             }
             charactersInLaser.Clear();
         }
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour {
         if (laserActive && charactersInLaser.Count > 0) {
             List<int> toRemove = new List<int>();
             for (int i = 0; i < charactersInLaser.Count; i++) {
+                if (!charactersInLaser[i]) continue;
                 charactersInLaser[i].transform.localPosition =
                     Vector3.MoveTowards(charactersInLaser[i].transform.localPosition, new Vector3(
                         charactersInLaser[i].transform.localPosition.x,
@@ -62,6 +66,8 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (laserActive && other.CompareTag("Collectable")) {
             other.transform.SetParent(transform);
+            other.GetComponent<CharacterAnimator>().MovingAnimation(false);
+            other.GetComponent<FleeingCharacter>().canMove = false;
             charactersInLaser.Add(other.gameObject);
         }
     }
