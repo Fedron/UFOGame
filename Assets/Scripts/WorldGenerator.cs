@@ -27,6 +27,11 @@ public class WorldGenerator : MonoBehaviour {
 		GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(
 			Random.Range(0, width), Random.Range(3, height), 0f
 		);
+		Invoke("RecalculateNavmesh", 0.2f);
+	}
+
+	private void RecalculateNavmesh() {
+		AstarPath.active.Scan(AstarPath.active.data.gridGraph);
 	}
 
 	private void GenerateMap() {

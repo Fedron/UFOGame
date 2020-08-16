@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 872698280523642077}
   - component: {fileID: 872698280523642078}
   - component: {fileID: 4268400105938614536}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: -5916515025299836090}
   - component: {fileID: -7821377488992444626}
   - component: {fileID: 5871306123174525464}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: House 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
