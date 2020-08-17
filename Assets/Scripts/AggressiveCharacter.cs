@@ -5,12 +5,27 @@ using Pathfinding;
 
 [RequireComponent(typeof(CharacterAnimator))]
 [RequireComponent(typeof(Seeker))]
-public class FleeingCharacter : MonoBehaviour, ICollectable {
+public class AggressiveCharacter : MonoBehaviour, ICollectable {
+    private enum AIState {
+        Fleeing,
+        Chasing,
+        Shooting,
+    }
+
     [HideInInspector] public bool canMove = true;
+    [Header("AI")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float runRange = 5f;
+    [SerializeField] float shootRange = 8f;
     [SerializeField] float nextWaypointDistance = 3;
     [SerializeField] float repathRate = 0.25f;
+
+    [Header("Shooting")]
+    [SerializeField] Transform weapon = default;
+    [SerializeField] SpriteRenderer weaponSprite = default;
+    [SerializeField] Transform[] firepoints = default;
+    [SerializeField, Min(0f)] float fireRate = default;
+    [SerializeField] GameObject bullet = default;
 
     new private Rigidbody2D rigidbody;
     private CharacterAnimator animator;
@@ -22,6 +37,8 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
     private int currentWaypoint = 0;
     private bool reachedEndOfPath;
     private float lastRepath = float.NegativeInfinity;
+    private AIState state = AIState.Chasing;
+    private bool canShoot = true;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -36,20 +53,39 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
     }
 
     private void Update() {
-        float distToPlayer = Vector3.Distance(transform.position, player.position);
-        if (canMove && distToPlayer < runRange) {
-            animator.MovingAnimation(true);
-            Pathfind();
-        } else {
+        if (!canMove) {
             animator.MovingAnimation(false);
+            return;
         }
+        float distToPlayer = Vector3.Distance(transform.position, player.position);
+        animator.MovingAnimation(true);
+
+        if (distToPlayer > shootRange) {
+            state = AIState.Chasing;
+            Pathfind();
+        } else if (distToPlayer < runRange) {
+            state = AIState.Fleeing;
+            Pathfind();
+        } else if (distToPlayer > runRange && distToPlayer < shootRange) {
+            state = AIState.Shooting;
+            animator.MovingAnimation(false);
+            AttackPlayer();
+        }
+
+        // if (state != AIState.Shooting && IsInvoking("Shoot")) {
+        //     CancelInvoke("Shoot");
+        // }
     }
 
     private void Pathfind() {
         if (Time.time > lastRepath + repathRate && seeker.IsDone()) {
             lastRepath = Time.time;
             Vector3 dir = player.position - transform.position;
-            seeker.StartPath(transform.position, transform.position + (dir.normalized * -runRange), OnPathComplete);
+            Vector3 targetPos = player.position;
+
+            if (state == AIState.Fleeing) targetPos = transform.position + (dir.normalized * -runRange);
+
+            seeker.StartPath(transform.position, targetPos, OnPathComplete);
         }
 
         if (path == null) return;
@@ -92,6 +128,36 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
             p.Release(this);
         }
     }
+
+    private void AttackPlayer() {
+        Vector3 vectorToTarget = player.position - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        weapon.rotation = Quaternion.Slerp(weapon.rotation, q, Time.deltaTime * 50f);
+
+        if (vectorToTarget.x < 0) weaponSprite.flipY = true;
+        else weaponSprite.flipY = false;
+
+        // if (!IsInvoking("Shoot")) {
+        //     InvokeRepeating("Shoot", 0.0000001f, fireRate);
+        // }
+
+        if (canShoot) {
+            canShoot = false;
+            Invoke("CanShoot", fireRate);
+            Shoot();
+        }
+    }
+
+    private void Shoot() {
+        foreach (Transform firepoint in firepoints) {
+            GameObject b = Instantiate(bullet, firepoint.position, firepoint.parent.rotation);
+            b.GetComponent<Rigidbody2D>().AddForce(firepoint.right * 800f);
+            Destroy(b, 1.5f);
+        }
+    }
+    
+    private void CanShoot() => canShoot = true;
 
     public void ToggleMovement(bool val) {
         collider.enabled = val;

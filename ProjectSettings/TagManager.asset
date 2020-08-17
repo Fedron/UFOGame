@@ -16,8 +16,8 @@ TagManager:
   - 
   - Player
   - Building
-  - 
-  - 
+  - Enemy
+  - PlayerCrosshair
   - 
   - 
   - 
@@ -39,6 +39,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Water
+    uniqueID: 4220823611
+    locked: 0
+  - name: Foliage
+    uniqueID: 2026981485
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemies
+    uniqueID: 4103277441
+    locked: 0
+  - name: Player
+    uniqueID: 3587969921
     locked: 0

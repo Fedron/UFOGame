@@ -29,8 +29,7 @@ public class PlayerController : MonoBehaviour {
             foreach (GameObject c in charactersInLaser) {
                 if (!c) continue;
                 c.transform.SetParent(null);
-                c.GetComponent<CharacterAnimator>().MovingAnimation(true);
-                c.GetComponent<FleeingCharacter>().canMove = true;
+                c.GetComponent<FleeingCharacter>().ToggleMovement(true);
             }
             charactersInLaser.Clear();
         }
@@ -42,12 +41,12 @@ public class PlayerController : MonoBehaviour {
                 if (!charactersInLaser[i]) continue;
                 charactersInLaser[i].transform.localPosition =
                     Vector3.MoveTowards(charactersInLaser[i].transform.localPosition, new Vector3(
-                        charactersInLaser[i].transform.localPosition.x,
                         0f,
+                        2.25f,
                         0f
                     ), laserSuckSpeed * Time.deltaTime);
 
-                if (charactersInLaser[i].transform.localPosition.y == 0f) {
+                if (charactersInLaser[i].transform.localPosition.y == 2.25f) {
                     Destroy(charactersInLaser[i]);
                     charactersInLaser[i] = null;
                     toRemove.Add(i);
@@ -64,10 +63,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (laserActive && other.CompareTag("Collectable")) {
+        if (laserActive && other.TryGetComponent<ICollectable>(out ICollectable c)) {
             other.transform.SetParent(transform);
-            other.GetComponent<CharacterAnimator>().MovingAnimation(false);
-            other.GetComponent<FleeingCharacter>().canMove = false;
+            c.ToggleMovement(false);
             charactersInLaser.Add(other.gameObject);
         }
     }

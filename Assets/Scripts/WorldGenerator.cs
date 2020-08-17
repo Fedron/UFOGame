@@ -25,7 +25,7 @@ public class WorldGenerator : MonoBehaviour {
 		SpawnBuildings();
 		Invoke("SpawnTiles", 0.05f);
 		GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(
-			Random.Range(0, width), Random.Range(3, height), 0f
+			Random.Range(5, width - 5), Random.Range(8, height - 5), 0f
 		);
 		Invoke("RecalculateNavmesh", 0.2f);
 	}
