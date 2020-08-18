@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 8315948795362558413}
   - component: {fileID: 8315948795362558410}
   - component: {fileID: 8315948795362558409}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_0_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  scoreValue: 0
   moveSpeed: 5
   runRange: 4
   shootRange: 8

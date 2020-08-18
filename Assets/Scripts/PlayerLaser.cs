@@ -36,7 +36,9 @@ public class PlayerLaser : MonoBehaviour {
                         0f
                     ), laserSuckSpeed * Time.deltaTime);
 
+                // The character has reached the top of the laser
                 if (charactersInLaser[i].transform.localPosition.y == 2.25f) {
+                    ScoreManager.Instance.AddScore(charactersInLaser[i].GetComponent<ICollectable>().ScoreValue);
                     Destroy(charactersInLaser[i]);
                     charactersInLaser[i] = null;
                     toRemove.Add(i);

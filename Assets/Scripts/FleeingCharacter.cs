@@ -7,6 +7,7 @@ using Pathfinding;
 [RequireComponent(typeof(Seeker))]
 public class FleeingCharacter : MonoBehaviour, ICollectable {
     [HideInInspector] public bool canMove = true;
+    [SerializeField] int scoreValue = default;
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float runRange = 5f;
     [SerializeField] float nextWaypointDistance = 3;
@@ -22,6 +23,7 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
     private int currentWaypoint = 0;
     private bool reachedEndOfPath;
     private float lastRepath = float.NegativeInfinity;
+    public int ScoreValue { get; set; }
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -29,6 +31,8 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
         collider = GetComponent<Collider2D>();
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         seeker = GetComponent<Seeker>();
+
+        ScoreValue = scoreValue;
     }
 
     private void Start() {

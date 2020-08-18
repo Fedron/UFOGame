@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 6460890427541852642}
   - component: {fileID: 6460890427541852645}
   - component: {fileID: 6460890427541852646}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_1_Bazooka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  scoreValue: 0
   moveSpeed: 6
   runRange: 12
   shootRange: 18

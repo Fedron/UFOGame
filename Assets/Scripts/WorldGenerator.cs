@@ -115,18 +115,18 @@ public class WorldGenerator : MonoBehaviour {
 
 		// Spawns all the edge colliders
 		Vector3[] edges = new Vector3[4];
-		edges[0] = new Vector3(width / 2, height, 0f);
-		edges[1] = new Vector3(width, height / 2, 0f);
-		edges[2] = new Vector3(width / 2, 0f, 0f);
-		edges[3] = new Vector3(0f, height / 2, 0f);
+		edges[0] = new Vector3(width / 2, height + 5f, 0f);
+		edges[1] = new Vector3(width + 5f, height / 2, 0f);
+		edges[2] = new Vector3(width / 2, -5f, 0f);
+		edges[3] = new Vector3(-5f, height / 2, 0f);
 		foreach (Vector3 pos in edges) {
 			GameObject edge = new GameObject("Edge");
 			edge.transform.position = pos;
 			edge.transform.SetParent(transform);
 			BoxCollider2D col = edge.AddComponent<BoxCollider2D>();
-			col.size = new Vector2(width, 1f);
+			col.size = new Vector2(width + 10f, 1f);
 
-			if (pos.x == width || pos.x == 0) {
+			if (pos.x == width + 5f || pos.x == -5f) {
 				edge.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 			}
 		}

@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  scoreValue: 0
   moveSpeed: 6
   runRange: 7
   nextWaypointDistance: 3

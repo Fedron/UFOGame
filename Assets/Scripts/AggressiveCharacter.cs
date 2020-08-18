@@ -13,6 +13,7 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
     }
 
     [HideInInspector] public bool canMove = true;
+    [SerializeField] int scoreValue = default;
     [Header("AI")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float runRange = 5f;
@@ -39,6 +40,7 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
     private float lastRepath = float.NegativeInfinity;
     private AIState state = AIState.Chasing;
     private bool canShoot = true;
+    public int ScoreValue { get; set; }
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -46,6 +48,8 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
         collider = GetComponent<Collider2D>();
         spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         seeker = GetComponent<Seeker>();
+        
+        ScoreValue = scoreValue;
     }
 
     private void Start() {

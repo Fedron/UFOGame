@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5661794797849464310}
   - component: {fileID: 5661794797849464305}
   - component: {fileID: 5661794797849464306}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_0_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  scoreValue: 0
   moveSpeed: 5
   runRange: 5
   shootRange: 10
