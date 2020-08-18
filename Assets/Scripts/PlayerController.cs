@@ -4,69 +4,65 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] SpriteRenderer laser = default;
-    [SerializeField] float laserSuckSpeed = 2f;
 
-    new Rigidbody2D rigidbody;
-    float horizontalInput, verticalInput;
-    bool laserActive = false;
-    List<GameObject> charactersInLaser = new List<GameObject>();
+    [Header("Dashing")]
+    [SerializeField] float dashAmount = 10f;
+    [SerializeField] float dashCooldown = 2f;
+    [SerializeField] ParticleSystem dashEffect = default;
+    [Space, SerializeField] Transform ufo = default;
+
+    [Header("UI")]
+    [SerializeField] GameObject firstLife = default;
+    [SerializeField] GameObject secondLife = default;
+
+    new private Rigidbody2D rigidbody;
+    private float horizontalInput, verticalInput;
+    private bool canDash = true;
+    private bool shouldDash;
+    private int lives = 2;
+    new private FollowCamera camera;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
+        camera = FindObjectOfType<FollowCamera>();
     }
 
     private void Update() {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        camera.movementOffset = new Vector3(horizontalInput, verticalInput, 0f);
 
-        if (!laserActive && Input.GetMouseButtonDown(0)) {
-            laserActive = true;
-            laser.size = new Vector2(laser.size.x, 2f);
-        } else if (laserActive && Input.GetMouseButtonUp(0)) {
-            laserActive = false;
-            laser.size = new Vector2(laser.size.x, 0f);
-            foreach (GameObject c in charactersInLaser) {
-                if (!c) continue;
-                c.transform.SetParent(null);
-                c.GetComponent<FleeingCharacter>().ToggleMovement(true);
-            }
-            charactersInLaser.Clear();
-        }
-
-        // Move characters up the laser
-        if (laserActive && charactersInLaser.Count > 0) {
-            List<int> toRemove = new List<int>();
-            for (int i = 0; i < charactersInLaser.Count; i++) {
-                if (!charactersInLaser[i]) continue;
-                charactersInLaser[i].transform.localPosition =
-                    Vector3.MoveTowards(charactersInLaser[i].transform.localPosition, new Vector3(
-                        0f,
-                        2.25f,
-                        0f
-                    ), laserSuckSpeed * Time.deltaTime);
-
-                if (charactersInLaser[i].transform.localPosition.y == 2.25f) {
-                    Destroy(charactersInLaser[i]);
-                    charactersInLaser[i] = null;
-                    toRemove.Add(i);
-                }
-            }
-            foreach (int index in toRemove) {
-                charactersInLaser.RemoveAt(index);
-            }
+        // Rotate UFO to match X Velocity
+        ufo.rotation = Quaternion.Euler(0f, 0f, horizontalInput * -10f);
+        if (canDash &&Input.GetMouseButtonDown(1)) {
+            canDash = false;
+            shouldDash = true;
+            dashEffect.Play();
+            Invoke("CanDash", dashCooldown);
         }
     }
 
     private void FixedUpdate() {
-        rigidbody.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * moveSpeed);
+        Vector3 velocity = new Vector3(horizontalInput * moveSpeed, verticalInput * moveSpeed, 0f);
+        transform.position += velocity * Time.fixedDeltaTime;
+
+        if (shouldDash) {
+            rigidbody.AddForce(new Vector2(horizontalInput, verticalInput) * dashAmount, ForceMode2D.Impulse);
+            shouldDash = false;
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (laserActive && other.TryGetComponent<ICollectable>(out ICollectable c)) {
-            other.transform.SetParent(transform);
-            c.ToggleMovement(false);
-            charactersInLaser.Add(other.gameObject);
+    private void CanDash() => canDash = true;
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Bullet")) {
+            lives--;
+
+            if (lives == 1) firstLife.SetActive(false);
+            if (lives <= 0) {
+                secondLife.SetActive(false);
+                Destroy(gameObject);
+            }
         }
     }
 }

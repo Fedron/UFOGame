@@ -176,6 +176,12 @@ TextureImporter:
   - first:
       213: 5670506684887016389
     second: Bullet_0
+  - first:
+      213: -5605220902565254426
+    second: Heart_Empty
+  - first:
+      213: -6480150247022702619
+    second: Heart_Full
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1504,7 +1510,7 @@ TextureImporter:
         width: 2
         height: 2
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1512,6 +1518,48 @@ TextureImporter:
       bones: []
       spriteID: 5c32b2949cfa1be40800000000000000
       internalID: 5670506684887016389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart_Empty
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 178
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eae00f69414632b0800000000000000
+      internalID: -5605220902565254426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart_Full
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 178
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ef4d030fa1e116a0800000000000000
+      internalID: -6480150247022702619
       vertices: []
       indices: 
       edges: []

@@ -53,7 +53,7 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
     }
 
     private void Update() {
-        if (!canMove) {
+        if (!canMove || player == null) {
             animator.MovingAnimation(false);
             return;
         }
