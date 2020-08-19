@@ -75,10 +75,6 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
             animator.MovingAnimation(false);
             AttackPlayer();
         }
-
-        // if (state != AIState.Shooting && IsInvoking("Shoot")) {
-        //     CancelInvoke("Shoot");
-        // }
     }
 
     private void Pathfind() {
@@ -142,10 +138,6 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
         if (vectorToTarget.x < 0) weaponSprite.flipY = true;
         else weaponSprite.flipY = false;
 
-        // if (!IsInvoking("Shoot")) {
-        //     InvokeRepeating("Shoot", 0.0000001f, fireRate);
-        // }
-
         if (canShoot) {
             canShoot = false;
             Invoke("CanShoot", fireRate);
@@ -167,5 +159,11 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
         collider.enabled = val;
         animator.MovingAnimation(val);
         canMove = val;
+    }
+
+    public void Destroy() {
+        ScoreManager.Instance.AddScore(ScoreValue);
+        FindObjectOfType<SpawnerManager>().spawnedEnemies--;
+        Destroy(gameObject);
     }
 }

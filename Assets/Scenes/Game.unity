@@ -5497,67 +5497,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436895811}
   m_CullTransparentMesh: 0
---- !u!1001 &459130404
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2598358254531290727, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: scoreValue
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290744, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_Name
-      value: Pig
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598358254531290746, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5771,6 +5710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 703321603}
   - component: {fileID: 703321602}
+  - component: {fileID: 703321604}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -5806,6 +5746,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703321604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703321601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbaa6c6593da15447932069dafaf4c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  world: {fileID: 1933123265}
+  startDelay: 1
+  animals:
+  - {fileID: 2598358254531290744, guid: 4de108ae146013b479e34ef5924a44a3, type: 3}
+  - {fileID: 2598358254531290744, guid: 4d781bea7f7202444bbceb683e63ddbe, type: 3}
+  - {fileID: 2598358254531290744, guid: a931489ffdb7f7b439629238b8cfd324, type: 3}
+  - {fileID: 2598358254531290744, guid: bc79d2a50d12e924597f36ed8cfd4213, type: 3}
+  - {fileID: 2598358254531290744, guid: d98110b2eb8afa343bc7e2ec84e75914, type: 3}
+  maxAnimals: 10
+  waves:
+  - startTime: 0
+    spawnInterval: 1
+    maxSpawnedEnemies: 1
+    enemies:
+    - {fileID: 5661794797849464311, guid: a6b7a3b66ba68634ebef2d5b69536eab, type: 3}
+  - startTime: 20
+    spawnInterval: 1.2
+    maxSpawnedEnemies: 3
+    enemies:
+    - {fileID: 5661794797849464311, guid: a6b7a3b66ba68634ebef2d5b69536eab, type: 3}
+  - startTime: 40
+    spawnInterval: 0.8
+    maxSpawnedEnemies: 2
+    enemies:
+    - {fileID: 8315948795362558412, guid: 881e1285340d6c8409a8ea1a9caf0b15, type: 3}
+  - startTime: 60
+    spawnInterval: 0.8
+    maxSpawnedEnemies: 2
+    enemies:
+    - {fileID: 8315948795362558412, guid: 881e1285340d6c8409a8ea1a9caf0b15, type: 3}
+    - {fileID: 6120448645466914156, guid: ee4a6f79b5dbea8408394a6620fd7866, type: 3}
+  spawnedAnimals: 0
+  spawnedEnemies: 0
 --- !u!1 &858658347
 GameObject:
   m_ObjectHideFlags: 0

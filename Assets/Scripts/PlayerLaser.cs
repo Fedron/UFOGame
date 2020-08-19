@@ -19,7 +19,7 @@ public class PlayerLaser : MonoBehaviour {
             foreach (GameObject c in charactersInLaser) {
                 if (!c) continue;
                 c.transform.SetParent(null);
-                c.GetComponent<FleeingCharacter>().ToggleMovement(true);
+                c.GetComponent<ICollectable>().ToggleMovement(true);
             }
             charactersInLaser.Clear();
         }
@@ -38,8 +38,7 @@ public class PlayerLaser : MonoBehaviour {
 
                 // The character has reached the top of the laser
                 if (charactersInLaser[i].transform.localPosition.y == 2.25f) {
-                    ScoreManager.Instance.AddScore(charactersInLaser[i].GetComponent<ICollectable>().ScoreValue);
-                    Destroy(charactersInLaser[i]);
+                    charactersInLaser[i].GetComponent<ICollectable>().Destroy();
                     charactersInLaser[i] = null;
                     toRemove.Add(i);
                 }

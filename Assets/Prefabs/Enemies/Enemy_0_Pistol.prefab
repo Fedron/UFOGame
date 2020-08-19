@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  scoreValue: 0
+  scoreValue: 50
   moveSpeed: 5
   runRange: 5
   shootRange: 10
@@ -146,7 +146,7 @@ MonoBehaviour:
   weaponSprite: {fileID: 5661794798436094781}
   firepoints:
   - {fileID: 5661794799700545859}
-  fireRate: 0.8
+  fireRate: 1.4
   bullet: {fileID: 4367620259573541461, guid: 727912de29bcfcd4aa6cb90a060f08ea, type: 3}
 --- !u!1 &5661794797869711014
 GameObject:

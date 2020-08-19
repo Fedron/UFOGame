@@ -40,6 +40,8 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
     }
 
     private void Update() {
+        if (player == null) return;
+
         float distToPlayer = Vector3.Distance(transform.position, player.position);
         if (canMove && distToPlayer < runRange) {
             animator.MovingAnimation(true);
@@ -101,5 +103,11 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
         collider.enabled = val;
         animator.MovingAnimation(val);
         canMove = val;
+    }
+
+    public void Destroy() {
+        ScoreManager.Instance.AddScore(ScoreValue);
+        FindObjectOfType<SpawnerManager>().spawnedAnimals--;
+        Destroy(gameObject);
     }
 }

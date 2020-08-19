@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  scoreValue: 0
+  scoreValue: 50
   moveSpeed: 5
   runRange: 4
   shootRange: 8
@@ -208,7 +208,7 @@ MonoBehaviour:
   - {fileID: 8315948796644859256}
   - {fileID: 6255651825550282807}
   - {fileID: 6090851861343407280}
-  fireRate: 1
+  fireRate: 2
   bullet: {fileID: 4367620259573541461, guid: 727912de29bcfcd4aa6cb90a060f08ea, type: 3}
 --- !u!1 &8315948795384378013
 GameObject:

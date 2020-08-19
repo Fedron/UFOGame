@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  scoreValue: 0
+  scoreValue: 50
   moveSpeed: 5
   runRange: 8
   shootRange: 15
