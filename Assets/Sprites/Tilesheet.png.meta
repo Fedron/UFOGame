@@ -182,6 +182,9 @@ TextureImporter:
   - first:
       213: -6480150247022702619
     second: Heart_Full
+  - first:
+      213: -1676116777915005611
+    second: Missle
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1531,7 +1534,7 @@ TextureImporter:
         width: 14
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1552,7 +1555,7 @@ TextureImporter:
         width: 14
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1560,6 +1563,27 @@ TextureImporter:
       bones: []
       spriteID: 5ef4d030fa1e116a0800000000000000
       internalID: -6480150247022702619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Missle
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 1
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 555cd42cbac3db8e0800000000000000
+      internalID: -1676116777915005611
       vertices: []
       indices: 
       edges: []

@@ -149,7 +149,7 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
         foreach (Transform firepoint in firepoints) {
             GameObject b = Instantiate(bullet, firepoint.position, firepoint.parent.rotation);
             b.GetComponent<Rigidbody2D>().AddForce(firepoint.right * 800f);
-            Destroy(b, 1.5f);
+            Destroy(b, 5f);
         }
     }
     

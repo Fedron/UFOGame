@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLaser : MonoBehaviour {
-    [SerializeField] SpriteRenderer laser = default;
+    [SerializeField] Animator laser = default;
+    [SerializeField] ParticleSystem laserParticles = default;
     [SerializeField] float laserSuckSpeed = 2f;
+    [SerializeField] GameObject characterDestroyEffect = default;
 
     private bool laserActive = false;
     private List<GameObject> charactersInLaser = new List<GameObject>();
@@ -12,10 +14,12 @@ public class PlayerLaser : MonoBehaviour {
     private void Update() {
         if (!laserActive && Input.GetMouseButtonDown(0)) {
             laserActive = true;
-            laser.size = new Vector2(laser.size.x, 2f);
+            laser.SetTrigger("TurnOn");
+            laserParticles.Play();
         } else if (laserActive && Input.GetMouseButtonUp(0)) {
             laserActive = false;
-            laser.size = new Vector2(laser.size.x, 0f);
+            laser.SetTrigger("TurnOff");
+            laserParticles.Stop();
             foreach (GameObject c in charactersInLaser) {
                 if (!c) continue;
                 c.transform.SetParent(null);
@@ -38,6 +42,9 @@ public class PlayerLaser : MonoBehaviour {
 
                 // The character has reached the top of the laser
                 if (charactersInLaser[i].transform.localPosition.y == 2.25f) {
+                    Destroy(
+                        Instantiate(characterDestroyEffect, charactersInLaser[i].transform.position, Quaternion.identity, transform.parent)
+                    , 1f);
                     charactersInLaser[i].GetComponent<ICollectable>().Destroy();
                     charactersInLaser[i] = null;
                     toRemove.Add(i);
