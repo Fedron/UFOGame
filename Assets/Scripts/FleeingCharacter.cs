@@ -36,7 +36,8 @@ public class FleeingCharacter : MonoBehaviour, ICollectable {
     }
 
     private void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        if (p) player = p.transform;
     }
 
     private void Update() {

@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour {
             if (lives <= 0) {
                 secondLife.SetActive(false);
                 Destroy(gameObject);
+                UIManager.Instance.ShowGameOverScreen();
             }
         }
     }

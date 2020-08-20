@@ -22,4 +22,8 @@ public class ScoreManager : MonoBehaviour {
         popup.GetComponent<TextMeshProUGUI>().SetText($"+{add.ToString("d3")}");
         Destroy(popup, 1f);
     }
+
+    public int GetScore() {
+        return score;
+    }
 }
