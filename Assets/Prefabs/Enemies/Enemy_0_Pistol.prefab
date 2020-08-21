@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canMove: 1
   scoreValue: 50
+  shootsound: {fileID: 8300000, guid: 3f6a1ed3e9bdc9b46917dde004082401, type: 3}
   moveSpeed: 5
   runRange: 5
   shootRange: 10

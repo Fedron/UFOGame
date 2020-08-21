@@ -6,12 +6,16 @@ using TMPro;
 public class ScoreManager : MonoBehaviour {
     public static ScoreManager Instance = null;
     [SerializeField] TextMeshProUGUI scoreText = default;
+    [SerializeField] TextMeshProUGUI bestScoreText = default;
     [SerializeField] GameObject scorePopup = default;
     private int score = 0;
 
     private void Awake() {
         Instance = this;
         scoreText.SetText("0000");
+
+        int best = PlayerPrefs.GetInt("score", 0);
+        bestScoreText.SetText(string.Concat("Best: ", best.ToString("d4")));
     }
 
     public void AddScore(int add) {

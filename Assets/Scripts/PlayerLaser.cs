@@ -7,6 +7,9 @@ public class PlayerLaser : MonoBehaviour {
     [SerializeField] ParticleSystem laserParticles = default;
     [SerializeField] float laserSuckSpeed = 2f;
     [SerializeField] GameObject characterDestroyEffect = default;
+    [SerializeField] CameraShakeProfile shakeProfile = default;
+    [SerializeField] AudioSource laserSound = default;
+    [SerializeField] AudioClip pickupSound = default;
 
     private bool laserActive = false;
     private List<GameObject> charactersInLaser = new List<GameObject>();
@@ -15,11 +18,15 @@ public class PlayerLaser : MonoBehaviour {
         if (!laserActive && Input.GetMouseButtonDown(0)) {
             laserActive = true;
             laser.SetTrigger("TurnOn");
+            laser.ResetTrigger("TurnOff");
             laserParticles.Play();
+            laserSound.Play();
         } else if (laserActive && Input.GetMouseButtonUp(0)) {
             laserActive = false;
             laser.SetTrigger("TurnOff");
+            laser.ResetTrigger("TurnOn");
             laserParticles.Stop();
+            laserSound.Stop();
             foreach (GameObject c in charactersInLaser) {
                 if (!c) continue;
                 c.transform.SetParent(null);
@@ -45,6 +52,8 @@ public class PlayerLaser : MonoBehaviour {
                     Destroy(
                         Instantiate(characterDestroyEffect, charactersInLaser[i].transform.position, Quaternion.identity, transform.parent)
                     , 1f);
+                    CameraShake.ShakeOnce(shakeProfile);
+                    SoundManager.Instance.Play(pickupSound);
                     charactersInLaser[i].GetComponent<ICollectable>().Destroy();
                     charactersInLaser[i] = null;
                     toRemove.Add(i);

@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    [SerializeField] float moveSpeed = 5f;
+    [Header("Playtesting")]
+    [SerializeField] bool invincible = false;
+
+    [Space, SerializeField] float moveSpeed = 5f;
 
     [Header("Dashing")]
     [SerializeField] float dashAmount = 10f;
     [SerializeField] float dashCooldown = 2f;
     [SerializeField] ParticleSystem dashEffect = default;
+    [SerializeField] CameraShakeProfile dashShake = default;
+    [SerializeField] AudioClip dashSound = default;
     [Space, SerializeField] Transform ufo = default;
 
     [Header("UI")]
@@ -38,6 +43,8 @@ public class PlayerController : MonoBehaviour {
             canDash = false;
             shouldDash = true;
             dashEffect.Play();
+            CameraShake.ShakeOnce(dashShake);
+            SoundManager.Instance.Play(dashSound);
             Invoke("CanDash", dashCooldown);
         }
     }
@@ -55,6 +62,7 @@ public class PlayerController : MonoBehaviour {
     private void CanDash() => canDash = true;
 
     private void OnCollisionEnter2D(Collision2D other) {
+        if (invincible) return;
         if (other.gameObject.CompareTag("Bullet")) {
             lives--;
 

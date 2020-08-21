@@ -253,3 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impact: {fileID: 2073805408083447555, guid: ea97f5427df40844599bbe6d8c97aa82, type: 3}
+  shakeProfile:
+    amount: {x: 0.5, y: 0.5, z: 0}
+    duration: 0.2
+    speed: 10

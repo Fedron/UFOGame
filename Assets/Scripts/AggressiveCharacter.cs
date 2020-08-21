@@ -14,6 +14,7 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
 
     [HideInInspector] public bool canMove = true;
     [SerializeField] int scoreValue = default;
+    [SerializeField] AudioClip shootsound = default;
     [Header("AI")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float runRange = 5f;
@@ -151,6 +152,7 @@ public class AggressiveCharacter : MonoBehaviour, ICollectable {
             b.GetComponent<Rigidbody2D>().AddForce(firepoint.right * 800f);
             Destroy(b, 5f);
         }
+        SoundManager.Instance.Play(shootsound);
     }
     
     private void CanShoot() => canShoot = true;

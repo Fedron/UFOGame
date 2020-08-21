@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canMove: 1
   scoreValue: 70
+  shootsound: {fileID: 8300000, guid: 7c5ca3dd358556a448a955de4f3ff2fb, type: 3}
   moveSpeed: 6
   runRange: 12
   shootRange: 18
@@ -208,7 +209,7 @@ MonoBehaviour:
   weaponSprite: {fileID: 6460890428061404969}
   firepoints:
   - {fileID: 6460890426796428631}
-  fireRate: 2.4
+  fireRate: 6
   bullet: {fileID: 5466160271059915311, guid: 983033d4a36ca904db6a1446adadc4a0, type: 3}
 --- !u!1 &6460890428021070025
 GameObject:

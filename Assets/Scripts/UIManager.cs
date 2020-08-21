@@ -8,7 +8,9 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField] GameObject gameUI = default;
     [SerializeField] GameObject gameOverUI = default;
+    [SerializeField] GameObject newBestUI = default;
     [SerializeField] TextMeshProUGUI scoreText = default;
+    [SerializeField] TextMeshProUGUI bestScoreText = default;
 
     private void Awake() {
         Instance = this;
@@ -16,6 +18,15 @@ public class UIManager : MonoBehaviour {
 
     public void ShowGameOverScreen() {
         scoreText.text = ScoreManager.Instance.GetScore().ToString("d4");
+
+        int cur = ScoreManager.Instance.GetScore();
+        int best = PlayerPrefs.GetInt("score", 0);
+        if (cur > best) {
+            PlayerPrefs.SetInt("score", cur);
+            newBestUI.SetActive(true);
+        }
+        bestScoreText.SetText(string.Concat("Best: ", PlayerPrefs.GetInt("score", 0).ToString("d4")));
+
         gameUI.SetActive(false);
         gameOverUI.SetActive(true);
     }

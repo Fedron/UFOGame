@@ -4908,8 +4908,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impact: {fileID: 102833249620472583, guid: c4043c21f92886e4e9c7567831ece425, type: 3}
+  destroySound: {fileID: 8300000, guid: 210ff61adf48eb34691f59ec35b47bab, type: 3}
+  shakeProfile:
+    amount: {x: 1, y: 1, z: 0}
+    duration: 0.2
+    speed: 10
   speed: 12
-  rotateSpeed: 240
+  rotateSpeed: 180
 --- !u!1 &6570905280793643690
 GameObject:
   m_ObjectHideFlags: 0
